@@ -129,14 +129,14 @@ func (daemon *Daemon) getInspectData(container *container.Container, size bool) 
 		Pid:        container.State.Pid,
 		ExitCode:   container.State.ExitCode(),
 		Error:      container.State.Error(),
-		StartedAt:  container.State.StartedAt.Format(time.RFC3339Nano),
-		FinishedAt: container.State.FinishedAt.Format(time.RFC3339Nano),
+		StartedAt:  container.State.StartedAt.Local().Format(time.RFC3339Nano),
+		FinishedAt: container.State.FinishedAt.Local().Format(time.RFC3339Nano),
 		Health:     containerHealth,
 	}
 
 	contJSONBase := &types.ContainerJSONBase{
 		ID:           container.ID,
-		Created:      container.Created.Format(time.RFC3339Nano),
+		Created:      container.Created.Local().Format(time.RFC3339Nano),
 		Path:         container.Path,
 		Args:         container.Args,
 		State:        containerState,
